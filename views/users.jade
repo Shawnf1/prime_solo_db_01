@@ -1,0 +1,22 @@
+//
+   Created by Shawn on 9/4/15.
+
+extends layout
+block content
+    h1 Users
+
+    .container-fluid
+        .row.col-xs-6
+            ul#users
+                each user in users
+                    li
+                        span.col-xs-4
+                            | #{user.last_name}, #{user.first_name}&nbsp
+                        span.col-xs-4
+                            strong Username:&nbsp
+                            | #{user.username}
+
+    //script#users-template(type="text/x-handlebars-template")
+    //    li #{{user.last_name}}, #{{user.first_name}}
+    //        strong Username:
+    //        #{{user.username}}
