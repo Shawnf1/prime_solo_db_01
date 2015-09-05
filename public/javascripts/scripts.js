@@ -14,4 +14,17 @@ $(document).ready(function() {
 		console.log(res);
 
 	});
+
+	// change the lockout status
+	$('li').on('change', '.locked', function () {
+		var ajaxData = { };
+		ajaxData["status"] = $(this).is(':checked');
+		ajaxData["id"] = $(this).closest('li').attr('id');
+		console.log("checkbox is ", status);
+		$.ajax({
+			type: 'PUT',
+			url: 'users/',
+			data: ajaxData
+		});
+	});
 });

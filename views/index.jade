@@ -1,6 +1,8 @@
 extends layout
 
 block content
+    if message != ""
+        h2= message
     form(action="/" method="post")
         fieldset
             legend Enter your login credentials

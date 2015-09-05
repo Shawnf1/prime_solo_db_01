@@ -10,7 +10,10 @@ var UserSchema = new Schema({
 	username: {type: String, required: true, index: {unique: true}},
 	password: {type: String, required: true},
 	first_name: String,
-	last_name: String
+	last_name: String,
+	created_on: Date,
+	last_access: Date,
+	locked_out: {type: Boolean, default: false}
 });
 
 UserSchema.pre('save', function (next) {
@@ -19,6 +22,10 @@ UserSchema.pre('save', function (next) {
 	// only hash the password if it has been modified (or is new)
 	if (!user.isModified('password')) {
 		return next();
+	}
+
+	if(!user.created_on) {
+		user.created_on = new Date();
 	}
 
 	// generate a salt

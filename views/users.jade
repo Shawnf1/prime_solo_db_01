@@ -3,20 +3,30 @@
 
 extends layout
 block content
-    h1 Users
 
-    .container-fluid
-        .row.col-xs-6
+    .container
+        .row.col-xs-offset-1.col-xs-8
+            h1 Users
+        .row.col-xs-10
             ul#users
                 each user in users
-                    li
-                        span.col-xs-4
+                    li(id="#{user.id}").row
+                        span.col-xs-5
+                            strong User: &nbsp
                             | #{user.last_name}, #{user.first_name}&nbsp
-                        span.col-xs-4
+                        span.col-xs-7
                             strong Username:&nbsp
                             | #{user.username}
-
-    //script#users-template(type="text/x-handlebars-template")
-    //    li #{{user.last_name}}, #{{user.first_name}}
-    //        strong Username:
-    //        #{{user.username}}
+                        span.col-xs-5
+                            strong Date Created: &nbsp
+                            | #{moment(user.created_on).format("MM/DD/YYYY HH:mm:ss")}
+                        span.col-xs-5
+                            strong Last Access: &nbsp
+                            if user.last_access
+                                | #{moment(user.last_access).format("MM/DD/YYYY HH:mm:ss")}
+                            else
+                                | Never logged in
+                        span.col-xs-2
+                            label
+                                Strong Locked Out:
+                                input.locked(type="checkbox" checked= user.locked_out)

@@ -15,6 +15,7 @@ var register = require('./routes/register');
 var User = require('./models/user');
 
 var app = express();
+app.locals.moment = require('moment');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -27,13 +28,9 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-//app.use('/javascripts', express.static(path.join(__dirname, '/node_modules/jquery/dist/')));
-//app.use('/javascripts', express.static(path.join(__dirname, '/node_modules/bootstrap/dist/')));
-//app.use('/stylesheets', express.static(path.join(__dirname, '/node_modules/bootstrap/dist/')));
 app.use('/javascripts', express.static(__dirname + '/node_modules/jquery/dist/'));
 app.use('/javascripts', express.static(__dirname + '/node_modules/bootstrap/dist/js'));
 app.use('/javascripts', express.static(__dirname + '/node_modules/handlebars/dist/'));
-app.use('/stylesheets', express.static(__dirname + '/node_modules/bootstrap/dist/css'));
 
 app.use(session({
 	secret: 'secret',
