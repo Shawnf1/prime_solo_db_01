@@ -26,7 +26,6 @@ router.post('/', function (req, res, next) {
 			}else{
 				User.findOneAndUpdate({username: user.username}, {last_access: new Date()}, function (err, user) {
 				});
-				console.log("going to users");
 				return res.redirect('/users');
 			}
 		});
