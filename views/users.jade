@@ -7,6 +7,7 @@ block content
     .container
         .row.col-xs-offset-1.col-xs-8
             h1 Users
+            button#Notes_btn Notes
         .row.col-xs-10
             ul#users
                 each user in users
@@ -30,3 +31,4 @@ block content
                             label
                                 Strong Locked Out:
                                 input.locked(type="checkbox" checked= user.locked_out)
+    script(defer src="javascripts/users_scripts.js")

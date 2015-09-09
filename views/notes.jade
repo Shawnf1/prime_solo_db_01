@@ -1,0 +1,48 @@
+//
+           Created by Shawn on 9/9/15.
+
+
+extends layout
+block content
+    .container
+        .row.col-xs-offset-1.col-xs-8
+            h1 Notes
+            button#Users_btn Switch to Users
+        form.form-inline.col-xs-10.col-xs-offset-0(role="form")
+            .form-group.col-xs-3
+                input(type="text" id="Name" placeholder="Name")
+                input(type="text" id="Desc" placeholder="Description")
+            .form-group.col-xs-4
+                textarea(id="Note" placeholder="Note")
+            .form-group.col-xs-2
+                label(for="read_chk") Read only
+                    input(type="checkbox" id="read_chk")
+                button#Add_btn Save Note
+
+        .row.col-xs-10
+            ul#notes_ul
+                if notes.length == 0
+                    li User has no notes
+                else
+                    each note in notes
+                        li(id="#{note.id}").row
+                            span.col-xs-5
+                                strong Title: &nbsp
+                                | #{note.title}&nbsp
+                            span.col-xs-7
+                                strong Description:&nbsp
+                                | #{note.desc}
+                            span.col-xs-5
+                                strong Date Created: &nbsp
+                                | #{moment(note.created_on).format("MM/DD/YYYY HH:mm:ss")}
+                            span.col-xs-5
+                                strong Last Access: &nbsp
+                                if note.updated_on
+                                    | #{moment(note.updated_on).format("MM/DD/YYYY HH:mm:ss")}
+                                else
+                                    | Never updated
+                            span.col-xs-2
+                                label
+                                    Strong Read Only:
+                                    input.locked(type="checkbox" checked= note.read_only)
+    script(defer src="javascripts/notes_scripts.js")
