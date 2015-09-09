@@ -39,4 +39,30 @@ router.put('/', function(req, res, next) {
 	});
 });
 
+router.post('/', function (req, res, next) {
+	if(req.isAuthenticated()) {
+		var note = new Note(req.body);
+		note.user_id = req.user.id;
+		console.log("post attempt reception", note);
+
+		note.save(function (err) {
+			if (err) {
+				return err;
+			}
+			else {
+				console.log("Post saved");
+			}
+		});
+	}
+	//	console.log("notes authed");
+	//	Note.find({user: req.user.id}, function (err, notes) {
+	//		if(err) {
+	//			return err;
+	//		}
+	//	});
+	//}
+	//console.log("post attempt on note");
+
+});
+
 module.exports = router;

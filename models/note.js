@@ -7,7 +7,8 @@ var Schema = mongoose.Schema;
 var NoteSchema = new Schema({
 	title: {type: String, required: true},
 	desc: String,
-	user: {type: String, required: true, index: {unique: true}},
+	note: {type: String, required: true},
+	user_id: {type: String, required: true, index: {unique: true}},
 	created_on: Date,
 	updated_on: Date,
 	read_only: {type: Boolean, default: false}

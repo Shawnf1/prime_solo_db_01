@@ -14,7 +14,6 @@ $(document).ready(function() {
 		var ajaxData = { };
 		ajaxData["status"] = $(this).is(':checked');
 		ajaxData["id"] = $(this).closest('li').attr('id');
-		console.log("checkbox is ", ajaxData["status"]);
 		$.ajax({
 			type: 'PUT',
 			url: 'notes/',
@@ -22,11 +21,15 @@ $(document).ready(function() {
 		});
 
 		ajaxCall.done(function (res) {
-			console.log('done updating', res);
+			//console.log('done updating', res);
+		});
+
+		ajaxCall.fail(function (res) {
+			//console.log("ajax error", res);
 		});
 
 		ajaxCall.always(function (res) {
-			console.log('ajax complete');
+			//console.log('ajax complete');
 		});
 	});
 
@@ -35,4 +38,25 @@ $(document).ready(function() {
 		window.location.replace('/users');
 	});
 
+	// save new note
+	$('form').on('submit', function (e) {
+		e.preventDefault();
+		var ajaxData = { };
+		ajaxData["title"] = $('#Title').val();
+		ajaxData["desc"] = $('#Desc').val();
+		ajaxData["note"] = $('#Note').val();
+		ajaxData["read_only"] = $('#Read_chk').is(':checked');
+
+		console.log("trying to add", ajaxData);
+
+		var ajaxCall = $.ajax({
+			type: 'POST',
+			url: 'notes/',
+			data: ajaxData
+		});
+
+		ajaxCall.done(function(res) {
+			console.log("saved note", res);
+		});
+	});
 });
